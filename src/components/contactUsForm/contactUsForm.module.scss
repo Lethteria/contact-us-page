@@ -1,0 +1,36 @@
+@import "../../colors";
+.wrap {
+  padding: 2.5rem;
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .button {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 500;
+
+    background-color: $black-color;
+  }
+}
+.checkbox {
+  //color: #c9c9c9;
+  //font-size: 0.75rem;
+  span {
+    font-size: 0.75rem;
+  }
+}
+.input {
+  input {
+    color: #c9c9c9;
+    &:active {
+      color: #222222;
+    }
+
+    &:hover {
+      color: #222222;
+    }
+  }
+}

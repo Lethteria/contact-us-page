@@ -1,0 +1,14 @@
+$black-color: #000;
+$black-light: #1b1b1b;
+$white-color: #fff;
+$grey-second-color: #c9c9c9; //greyLight
+$grey-main-color: #8d8d8d; //greyDark
+$background-color: #fbfbfb;
+
+:export {
+  black-color: $black-color;
+  white-color: $white-color;
+  black-light: $black-light;
+  backgroundColor: $background-color;
+  //color: #616161;
+}

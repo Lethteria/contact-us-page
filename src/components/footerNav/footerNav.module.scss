@@ -1,0 +1,14 @@
+@import "../../colors";
+
+.link {
+  display: flex;
+  margin-bottom: 1rem;
+
+  color: $white-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: $grey-second-color;
+  }
+}

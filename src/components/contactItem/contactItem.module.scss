@@ -1,0 +1,15 @@
+@import "../../../src/colors";
+
+.wrap {
+  margin-bottom: 3rem;
+
+  a {
+    display: flex;
+    text-decoration: none;
+    color: $white-color;
+  }
+
+  .text {
+    padding-left: 1.5rem;
+  }
+}
