@@ -16,15 +16,15 @@ export default function FooterContent(){
             <FooterSubscribe/>
             with this layout I cann't implement the normal logic for FooterNav block.
             */}
-            <Grid container>
+            <Grid container spacing={2}>
 
-                <Grid item xs={6} sm={12} md={12} lg={3}>
+                <Grid item xs={6} sm={12} md={12} lg={3} mb={3}>
                     <FooterContacts/>
                 </Grid>
 
                 <FooterNav/>
 
-                <Grid item xs={12} sm={12} md={3} lg={3}>
+                <Grid item xs={12} sm={8} md={3}>
                     <FooterSubscribe/>
                 </Grid>
 

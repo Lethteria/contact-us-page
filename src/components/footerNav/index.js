@@ -5,32 +5,34 @@ import {Grid, Typography} from "@mui/material";
 
 export default function FooterNav(){
     //navData could be data fetching from server of from store
-    const navData = [{title: "",
+    const navData = [{title: "Company",
                       links: [{href: "#",
-                               text: "dsds"},
+                               text: "About"},
                               {href: "#",
-                               text: "cvcxfgv bbfh"},
+                               text: "Contact"},
                                {href: "#",
-                               text: "dsds"}
+                               text: "Blogs"}
                               ]
                       },
-                     {title: "",
+                     {title: "Legal",
                       links: [{href: "#",
-                          text: "dsds"},
-                          {href: "#",
-                              text: "bbfh"},
-                          {href: "#",
-                              text: "dsdvvvvs"}
-                      ]
+                               text: "Privacy Policy"},
+                              {href: "#",
+                               text: "Terms & Services"},
+                              {href: "#",
+                               text: "Terms of Use"},
+                              {href: "#",
+                               text: "Refund Policy"}
+                            ]
                      },
-                     {title: "",
+                     {title: "Quick Links",
                       links: [{href: "#",
-                          text: "qqqqqq"},
-                          {href: "#",
-                              text: "cvcxfgv bbfh"},
-                          {href: "#",
-                              text: "dsds"}
-                      ]
+                               text: "Techlabz Keybox"},
+                              {href: "#",
+                               text: "Downloads"},
+                              {href: "#",
+                               text: "Forum"}
+                             ]
                      }
                     ];
 
@@ -46,9 +48,9 @@ export default function FooterNav(){
     }
 
     const navColumn = navData.map((item) => {
-       return ( <Grid item xs={6} sm={4} md={3} lg={2}>
+       return ( <Grid item xs={6} sm={4} md={3} lg={2} mb={3}>
                     <Typography variant="h4">
-                        title
+                        {item.title}
                     </Typography>
 
                     <div>
@@ -64,4 +66,3 @@ export default function FooterNav(){
         </>
     )
 }
-//if (item.links)

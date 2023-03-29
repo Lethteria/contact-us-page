@@ -1,13 +1,37 @@
 @import "../../colors";
 .wrap {
-  padding: 2.5rem;
+  padding: 1.5rem 1rem;
+
   border-radius: 10px;
-  color: $white-color;
   background-color: $black-color;
+
+  text-align: center;
+  color: $white-color;
 
    p {
      margin: 0.5rem 0;
-     font-size: 1.125rem;
+     font-size: 0.75rem;
      color:$grey-second-color;
    }
+}
+
+@media (min-width: 600px){
+  .wrap {
+    padding: 1.5rem;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 900px){
+  .wrap {
+    padding: 2.5rem;
+    text-align: left;
+
+    p {
+      font-size: 1.125rem;
+    }
+  }
 }

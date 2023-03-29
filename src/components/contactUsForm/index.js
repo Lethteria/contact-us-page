@@ -14,7 +14,7 @@ export default function ContactUsForm(){
         <div className={styles.wrap}>
 
             <form >
-                <Grid container spacing={5}>
+                <Grid container justifyContent="flex-end" spacing={5}>
 
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -119,7 +119,7 @@ export default function ContactUsForm(){
                     />
                     </Grid>
 
-                    <Grid item xs={12} sm={6} md={5}>
+                    <Grid item xs={12} sm={6} md={6} lg={5}>
                         <Button variant="contained"
                                 disableElevation
                                 fullWidth

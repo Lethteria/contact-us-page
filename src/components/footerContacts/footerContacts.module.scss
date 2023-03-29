@@ -3,4 +3,29 @@
 }
 .item {
   margin-bottom: 1rem;
+
+  a {
+    margin: 0;
+
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (min-width: 900px){
+  .contacts {
+    display: flex;
+  }
+  .item  {
+     width: 33.33%;
+   }
+}
+
+@media (min-width: 1200px){
+  .contacts {
+    flex-direction: column;
+  }
+  .item  {
+    width: 100%;
+  }
 }

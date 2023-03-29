@@ -21,24 +21,39 @@ const theme = createTheme({
         fontFamily: ['Poppins, Roboto, "Helvetica Neue", sans-serif'
             ].join(','),
         h1: {
-            fontSize: '2.5rem',
-            fontWeight: 700
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            '@media (min-width:600px)': {
+                fontSize: '2.5rem',
+            }
         },
         h2: {
             fontSize: '2.25rem',
             fontWeight: 700
         },
         h3: {
-            fontSize: '1.75rem',
-            fontWeight: 600
+            fontSize: '1.25rem',
+            fontWeight: 600,
+            '@media (min-width:600px)': {
+                fontSize: '1.75rem',
+            }
         },
         h4: {
-            fontSize: '1.125rem',
-            fontWeight: 600
+            fontSize: '1rem',
+            fontWeight: 600,
+            '@media (min-width:600px)': {
+                fontSize: '1.125rem',
+            },
         },
+
     },
+
     components: {
         MuiCssBaseline: {
+            '@media (min-width:600px)': {
+                fontSize: 12,
+                backgroundColor: '#000',
+            },
             styleOverrides:
                 `
             @font-face {
@@ -73,9 +88,14 @@ const theme = createTheme({
               font-style: normal;
               font-display: swap;
             }
+            
+            @media (min-width: 600px){                 
+                            font-size: 1rem;
+                }
         `,
         },
     },
 });
+
 
 export {theme}

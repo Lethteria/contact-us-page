@@ -2,6 +2,7 @@
 
 .wrap {
   display: flex;
+  justify-content: center;
 
   a {
     display: flex;
@@ -22,5 +23,11 @@
       color: $black-color;
       background-color: $white-color;
     }
+  }
+}
+
+@media (min-width: 900px){
+  .wrap {
+    justify-content: flex-start;
   }
 }
