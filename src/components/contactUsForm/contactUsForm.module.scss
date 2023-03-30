@@ -13,11 +13,13 @@
     font-weight: 500;
 
     background-color: $black-color;
+
+    &:hover {
+      background-color: $grey-main-color;
+    }
   }
 }
 .checkbox {
-  //color: #c9c9c9;
-  //font-size: 0.75rem;
   span {
     font-size: 0.75rem;
   }
@@ -30,7 +32,9 @@
     }
 
     &:hover {
+      cursor: pointer;
       color: #222222;
     }
   }
 }
+

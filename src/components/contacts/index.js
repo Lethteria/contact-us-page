@@ -27,6 +27,7 @@ export default function Contacts(props){
                                          text={item.text}
                                          icon={item.icon}
                                          href={item.href}
+                                         key={item.text}
                             />
                         )
 

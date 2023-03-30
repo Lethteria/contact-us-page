@@ -41,6 +41,7 @@ export default function FooterNav(){
 
             return <a href={link.href}
                       className={styles.link}
+                      key={link.text}
                     >
                         {link.text}
                     </a>
@@ -48,7 +49,11 @@ export default function FooterNav(){
     }
 
     const navColumn = navData.map((item) => {
-       return ( <Grid item xs={6} sm={4} md={3} lg={2} mb={3}>
+       return ( <Grid
+                   item
+                   xs={6} sm={4} md={3} lg={2} mb={3}
+                   key={item.title}
+                >
                     <Typography variant="h4">
                         {item.title}
                     </Typography>

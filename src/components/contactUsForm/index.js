@@ -5,29 +5,118 @@ import {CheckCircle, Circle} from '@mui/icons-material';
 
 export default function ContactUsForm(){
 
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    const [isChecked, setIsChecked] = useState({isCheckedOne: {value: "General Inquiry", check: true},
+                                                         isCheckedTwo: {value: null, check: false},
+                                                         isCheckedThree: {value: null, check: false},
+                                                         isCheckedFour: {value: null, check: false}});
 
-    function onChangeName(e){
-        setName(e.target.value);
+    const checkboxData =[{label: "General Inquiry",
+                           name: 'isCheckedOne',
+                          isChecked: isChecked.isCheckedOne.check},
+                         {label: "General Inquiry",
+                          name: 'isCheckedTwo',
+                          isChecked: isChecked.isCheckedTwo.check},
+                         {label: "General Inquiry",
+                           name: 'isCheckedThree',
+                          isChecked: isChecked.isCheckedThree.check},
+                         {label: "General Inquiry",
+                          name: 'isCheckedFour',
+                          isChecked: isChecked.isCheckedFour.check}
+                        ]
+
+    function onChangeFirstName(e){
+        setFirstName(e.target.value);
     }
+    function onChangeLastName(e){
+        setLastName(e.target.value);
+    }
+    function onChangeEmail(e){
+        setEmail(e.target.value);
+    }
+    function onChangePhone(e){
+        setPhone(e.target.value);
+    }
+
+    function onChangeChecked(name){
+        return function (e){
+            setIsChecked({...isChecked, [name]: {value: e.target.value, check: !isChecked[name].check}});// [name]={...isChecked[name], check: !check}
+        }
+    }
+
+    function onChangeMessage(e){
+        setMessage(e.target.value);
+    }
+
+    const checkboxList = checkboxData.map((item,index) => (
+        <FormControlLabel control={<Checkbox checked={item.isChecked}
+                                             color="default"
+                                             size="small"
+                                             icon={<Circle/>}
+                                             checkedIcon={<CheckCircle />}
+                                             sx={{
+                                                 color: "#c9c9c9",
+                                                 '&.Mui-checked': {
+                                                     color: "#000",
+                                                 },
+                                             }}
+                                             value={item.label}
+
+                                             onChange={onChangeChecked(item.name)}
+                                    />}
+                          label={item.label}
+                          className={styles.checkbox}
+                          key={index}
+        />
+    ))
+
+    function onSubmitForm(e){
+        e.preventDefault();
+        const user={data: {firstName,
+                            lastName,
+                            email,
+                            phone
+                            },
+                    message,
+                    checkboxVal:[]
+                   }
+        for (let value in isChecked){
+            if (isChecked[value].check){
+                user.checkboxVal.push(isChecked[value].value)
+            }
+        }
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+        setMessage("");
+        setEmail("")
+
+        //here should be some logic (show modal "success" for user, validation, send data to server and so on)
+        console.log(user)
+    }
+
     return(
         <div className={styles.wrap}>
 
-            <form >
+            <form onSubmit={onSubmitForm}>
                 <Grid container justifyContent="flex-end" spacing={5}>
 
                     <Grid item xs={12} sm={6}>
                         <TextField
                             label="First Name"
+                            name="firstName"
                             variant="standard"
                             color="greyDark"
                             focused
-                            error
                             helperText="Incorrect entry"
                             className={styles.input}
                             fullWidth
-                            value={name}
-                            onChange={onChangeName}
+                            value={firstName}
+                            onChange={onChangeFirstName}
                         />
                     </Grid>
 
@@ -39,6 +128,8 @@ export default function ContactUsForm(){
                             focused
                             className={styles.input}
                             fullWidth
+                            value={lastName}
+                            onChange={onChangeLastName}
                         />
                     </Grid>
 
@@ -46,11 +137,14 @@ export default function ContactUsForm(){
                         <TextField
                             label="Email"
                             type="email"
+                            name="email"
                             variant="standard"
                             color="greyDark"
                             focused
                             className={styles.input}
                             fullWidth
+                            value={email}
+                            onChange={onChangeEmail}
                         />
                     </Grid>
 
@@ -66,6 +160,8 @@ export default function ContactUsForm(){
                             }}
                             className={styles.input}
                             fullWidth
+                            value={phone}
+                            onChange={onChangePhone}
                         />
                     </Grid>
 
@@ -73,35 +169,7 @@ export default function ContactUsForm(){
                     <div>
                         <h4>Select Subject?</h4>
                         <div>
-                            <FormControlLabel control={<Checkbox defaultChecked
-                                                                 color="default"
-                                                                 size="small"
-                                                                 icon={<Circle/>}
-                                                                 checkedIcon={<CheckCircle />}
-                                                                 sx={{
-                                                                     color: "#c9c9c9",
-                                                                     '&.Mui-checked': {
-                                                                         color: "#000",
-                                                                     },
-                                                                 }}
-                                                        />}
-                                              label="General Inquiry"
-                                              className={styles.checkbox}
-                            />
-
-                            <FormControlLabel control={<Checkbox size="small"/>}
-                                              label="General Inquiry"
-                                              className={styles.checkbox}
-                            />
-
-                            <FormControlLabel control={<Checkbox size="small"/>}
-                                              label="General Inquiry"
-                                              className={styles.checkbox}
-                            />
-                            <FormControlLabel control={<Checkbox size="small"/>}
-                                              label="General Inquiry"
-                                              className={styles.checkbox}
-                            />
+                            {checkboxList}
                         </div>
                     </div>
                     </Grid>
@@ -116,6 +184,7 @@ export default function ContactUsForm(){
                         focused
                         className={styles.input}
                         fullWidth
+                        onChange={onChangeMessage}
                     />
                     </Grid>
 
@@ -123,17 +192,15 @@ export default function ContactUsForm(){
                         <Button variant="contained"
                                 disableElevation
                                 fullWidth
-                                className={styles.button}>
+                                className={styles.button}
+                                type="submit"
+                        >
                             Send Message
                         </Button>
                     </Grid>
 
                 </Grid>
             </form>
-
-
-
-
 
         </div>
 

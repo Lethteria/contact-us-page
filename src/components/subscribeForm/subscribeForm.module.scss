@@ -10,6 +10,10 @@
     font-weight: 500;
 
     background-color: $black-color;
+
+    &:hover {
+      background-color: $grey-main-color;
+    }
   }
 }
 .message {
@@ -33,7 +37,7 @@
     }
 
     &:hover {
-      color: #222222;
+      color: $white-color;
     }
   }
 }
