@@ -1,0 +1,23 @@
+@import "../../colors";
+
+.wrap {
+  display: flex;
+}
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+  width: 32px;
+  margin-left: 1.5rem;
+
+  border: 1px solid;
+  border-radius: 50%;
+  color: $black-color;
+
+  &:hover {
+    text-decoration: underline;
+    color: $grey-main-color;
+  }
+}

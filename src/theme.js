@@ -88,10 +88,6 @@ const theme = createTheme({
               font-style: normal;
               font-display: swap;
             }
-            
-            @media (min-width: 600px){                 
-                            font-size: 1rem;
-                }
         `,
         },
     },

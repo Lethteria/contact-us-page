@@ -1,0 +1,32 @@
+@import "../../colors";
+
+header.wrap {
+  padding: 1.5rem 0;
+  background-color: $background-color;
+}
+
+.drawerWrap {
+  color: black;
+  justify-content: flex-end;
+
+  button {
+    padding-right: 0;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.menu {
+  flex-grow: 1;
+  justify-content: flex-end;
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .menu {
+    display: flex;
+  }
+
+}
