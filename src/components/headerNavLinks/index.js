@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from "./HeaderNavLinksDesktop.module.scss";
+import styles from "./HeaderNavLinks.module.scss";
 import {clsx} from "clsx";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function HeaderNavLinksDesktop(props){
+export default function HeaderNavLinks(props){
 
     const pages = [ {title: "Home",
         href: "#",

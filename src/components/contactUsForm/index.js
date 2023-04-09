@@ -1,78 +1,23 @@
-import React, {useState} from "react";
-import styles from "./contactUsForm.module.scss"
-import {Button, Checkbox, FormControlLabel, Grid, TextField} from "@mui/material";
-import {CheckCircle, Circle} from '@mui/icons-material';
+import React from "react";
+import styles from "./contactUsForm.module.scss";
+import {UseInput} from "../../hooks/useInput";
+import {UseCheckbox} from "../../hooks/useCheckbox";
+import CheckboxBlock from "../checkboxBlock";
+
+import {Button, Grid, TextField} from "@mui/material";
 
 export default function ContactUsForm(){
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [message, setMessage] = useState("");
-    const [isChecked, setIsChecked] = useState({isCheckedOne: {value: "General Inquiry", check: true},
-                                                         isCheckedTwo: {value: null, check: false},
-                                                         isCheckedThree: {value: null, check: false},
-                                                         isCheckedFour: {value: null, check: false}});
+    const [inputData, onChangeInput] = UseInput({firstName: "",
+                                                          lastName: "",
+                                                          email: "",
+                                                          phone: "",
+                                                          message: ""
+                                                        });
+    const {firstName, lastName, email, phone, message} = inputData;
 
-    const checkboxData =[{label: "General Inquiry",
-                           name: 'isCheckedOne',
-                          isChecked: isChecked.isCheckedOne.check},
-                         {label: "General Inquiry",
-                          name: 'isCheckedTwo',
-                          isChecked: isChecked.isCheckedTwo.check},
-                         {label: "General Inquiry",
-                           name: 'isCheckedThree',
-                          isChecked: isChecked.isCheckedThree.check},
-                         {label: "General Inquiry",
-                          name: 'isCheckedFour',
-                          isChecked: isChecked.isCheckedFour.check}
-                        ]
-
-    function onChangeFirstName(e){
-        setFirstName(e.target.value);
-    }
-    function onChangeLastName(e){
-        setLastName(e.target.value);
-    }
-    function onChangeEmail(e){
-        setEmail(e.target.value);
-    }
-    function onChangePhone(e){
-        setPhone(e.target.value);
-    }
-
-    function onChangeChecked(name){
-        return function (e){
-            setIsChecked({...isChecked, [name]: {value: e.target.value, check: !isChecked[name].check}});// [name]={...isChecked[name], check: !check}
-        }
-    }
-
-    function onChangeMessage(e){
-        setMessage(e.target.value);
-    }
-
-    const checkboxList = checkboxData.map((item,index) => (
-        <FormControlLabel control={<Checkbox checked={item.isChecked}
-                                             color="default"
-                                             size="small"
-                                             icon={<Circle/>}
-                                             checkedIcon={<CheckCircle />}
-                                             sx={{
-                                                 color: "#c9c9c9",
-                                                 '&.Mui-checked': {
-                                                     color: "#000",
-                                                 },
-                                             }}
-                                             value={item.label}
-
-                                             onChange={onChangeChecked(item.name)}
-                                    />}
-                          label={item.label}
-                          className={styles.checkbox}
-                          key={index}
-        />
-    ))
+    const labels = ["General Inquiry1", "General Inquiry2", "General Inquiry3", "General Inquiry4"];
+    const [isChecked, onChangeChecked] = UseCheckbox(labels);
 
     function onSubmitForm(e){
         e.preventDefault();
@@ -89,14 +34,8 @@ export default function ContactUsForm(){
                 user.checkboxVal.push(isChecked[value].value)
             }
         }
-        setFirstName("");
-        setLastName("");
-        setPhone("");
-        setMessage("");
-        setEmail("")
-
-        //here should be some logic (show modal "success" for user, validation, send data to server and so on)
-        console.log(user)
+        console.log(user);
+        onChangeInput(e, true);
     }
 
     return(
@@ -116,20 +55,21 @@ export default function ContactUsForm(){
                             className={styles.input}
                             fullWidth
                             value={firstName}
-                            onChange={onChangeFirstName}
+                            onChange={onChangeInput}
                         />
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
                         <TextField
                             label="Last Name"
+                            name="lastName"
                             variant="standard"
                             color="greyDark"
                             focused
                             className={styles.input}
                             fullWidth
                             value={lastName}
-                            onChange={onChangeLastName}
+                            onChange={onChangeInput}
                         />
                     </Grid>
 
@@ -144,7 +84,7 @@ export default function ContactUsForm(){
                             className={styles.input}
                             fullWidth
                             value={email}
-                            onChange={onChangeEmail}
+                            onChange={onChangeInput}
                         />
                     </Grid>
 
@@ -152,6 +92,7 @@ export default function ContactUsForm(){
                         <TextField
                             label="Phone Number"
                             type="number"
+                            name="phone"
                             variant="standard"
                             color="greyDark"
                             focused
@@ -161,16 +102,18 @@ export default function ContactUsForm(){
                             className={styles.input}
                             fullWidth
                             value={phone}
-                            onChange={onChangePhone}
+                            onChange={onChangeInput}
                         />
                     </Grid>
 
                     <Grid item xs={12}>
                     <div>
                         <h4>Select Subject?</h4>
-                        <div>
-                            {checkboxList}
-                        </div>
+
+                        <CheckboxBlock labels={labels}
+                                       isChecked={isChecked}
+                                       onChangeChecked={onChangeChecked}
+                        />
                     </div>
                     </Grid>
 
@@ -178,13 +121,15 @@ export default function ContactUsForm(){
                     <TextField
                         label="Message"
                         type="textarea"
+                        name="message"
                         placeholder="Write your message.."
                         variant="standard"
                         color="greyDark"
                         focused
                         className={styles.input}
                         fullWidth
-                        onChange={onChangeMessage}
+                        value={message}
+                        onChange={onChangeInput}
                     />
                     </Grid>
 
@@ -203,6 +148,5 @@ export default function ContactUsForm(){
             </form>
 
         </div>
-
     )
 }

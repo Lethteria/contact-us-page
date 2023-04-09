@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./headerNavDrawer.module.scss";
 import Box from "@mui/material/Box";
 import HeaderNavMenu from "../headerNavMenu";
-import HeaderNavLinksDesktop from "../headerNavLinksDesktop";
+import HeaderNavLinks from "../headerNavLinks";
 import {Typography} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,8 +15,6 @@ export default function HeaderNavDrawer(props){
     return(
         <Box className={styles.wrap}
             role="presentation"
-            onClick={onClick}
-            onKeyDown={onKeyDown}
         >
             <div className={styles.header}>
                 <Typography variant="h3"
@@ -30,6 +28,7 @@ export default function HeaderNavDrawer(props){
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={onClick}
+                    onKeyDown={onKeyDown}
                     color="white"
                     className={styles.button}
                 >
@@ -37,7 +36,7 @@ export default function HeaderNavDrawer(props){
                 </IconButton>
             </div>
 
-            <HeaderNavLinksDesktop className={styles.link}/>
+            <HeaderNavLinks className={styles.link}/>
 
             <HeaderNavMenu className={styles.menu}/>
         </Box>

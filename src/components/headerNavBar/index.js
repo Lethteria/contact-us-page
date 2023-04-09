@@ -1,36 +1,33 @@
 import React from 'react';
 import styles from "./headerNavBar.module.scss";
-import HeaderNavLinksDesktop from "../headerNavLinksDesktop";
+import HeaderNavLinks from "../headerNavLinks";
 import HeaderNavMenu from "../headerNavMenu";
 import HeaderNavDrawer from "../headerNavDrawer";
+import MenuButton from "../menuButton";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
-
-
-
+import {useMediaQuery} from "@mui/material";
 
 export default function HeaderNavBar() {
+    const [showDrawer, setShowDrawer] = React.useState(false);
+    const showNavDesktop = useMediaQuery('(min-width:900px)');
 
-    const [state, setState] = React.useState({right: false});
-
-    const toggleDrawer = (anchor, open) => (event) => {
+    const toggleDrawer = (bool) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
-        setState({ ...state, 'right': open });
+        setShowDrawer(bool);
     };
 
     return (
         <AppBar position="static"
-                className={styles.wrap}>
+                className={styles.wrap}
+        >
             <Container>
                 <Toolbar disableGutters>
 
@@ -39,36 +36,27 @@ export default function HeaderNavBar() {
                         Logo here
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                         className={styles.drawerWrap}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={toggleDrawer('right', true)}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                    {!showNavDesktop
+                        &&
+                        <Box className={styles.drawerWrap}>
+                            <MenuButton onClickMenu={toggleDrawer(true)}/>
 
+                            <Drawer anchor='right'
+                                    open={showDrawer}
+                                    onClose={toggleDrawer(false)}
+                            >
+                                <HeaderNavDrawer onClick={toggleDrawer(false)}
+                                                 onKeyDown={toggleDrawer(false)}
+                                />
+                            </Drawer>
+                        </Box>
+                    }
 
-                        <Drawer
-                            anchor='right'
-                            open={state['right']}
-                            onClose={toggleDrawer('right', false)}
-                        >
-                            <HeaderNavDrawer onClick={toggleDrawer('right', false)}
-                                             onKeyDown={toggleDrawer('right', false)}
-                            />
-                        </Drawer>
-                    </Box>
-
-
-                    <div className={styles.menu}>
-                        <HeaderNavLinksDesktop/>
-                        <HeaderNavMenu/>
-                    </div>
+                    {showNavDesktop && <div className={styles.menu}>
+                                            <HeaderNavLinks/>
+                                            <HeaderNavMenu/>
+                                       </div>
+                    }
 
                 </Toolbar>
             </Container>

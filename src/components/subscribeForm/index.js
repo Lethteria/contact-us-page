@@ -1,16 +1,16 @@
-import React, {useRef} from "react";
+import React from "react";
 import styles from "./subscribeForm.module.scss";
+import {UseInput} from "../../hooks/useInput";
 import {Button, TextField} from "@mui/material";
 
-
 export default function SubscribeForm(){
-    const textareaRef = useRef();
+
+    const [inputData, onChangeInput] = UseInput({email: ""})
 
     function onSubmitForm(e){
         e.preventDefault();
-        let value = textareaRef.current.value;
-
-        console.log(value);
+        console.log(inputData);
+        onChangeInput(e, true);
     }
 
     return (
@@ -21,8 +21,10 @@ export default function SubscribeForm(){
                     placeholder="Your email address"
                     variant="standard"
                     color="greyDark"
+                    name="email"
+                    value={inputData.email}
+                    onChange={onChangeInput}
                     className={styles.input}
-                    ref={textareaRef}
                 />
 
                 <Button variant="contained"
@@ -31,7 +33,9 @@ export default function SubscribeForm(){
                         className={styles.button}>
                     Subscribe
                 </Button>
+
                 <p className={styles.message}>*  Will send you weekly updates for your better tool management.</p>
+
             </form>
         </div>
     )
