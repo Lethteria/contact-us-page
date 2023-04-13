@@ -1,30 +1,36 @@
 import React from "react";
 import styles from "./subscribeForm.module.scss";
-import {UseInput} from "../../hooks/useInput";
+import {Validate} from "./validateSubscribeForm";
 import {Button, TextField} from "@mui/material";
+import {useFormik} from "formik";
 
 export default function SubscribeForm(){
 
-    const [inputData, onChangeInput] = UseInput({email: ""})
-
-    function onSubmitForm(e){
-        e.preventDefault();
-        console.log(inputData);
-        onChangeInput(e, true);
-    }
+    const validate = Validate;
+    const formik = useFormik({
+        initialValues: {email: ""},
+        validate,
+        onSubmit: (values, {resetForm}) => {
+            console.log(values.email.trim());
+            resetForm();
+        }
+    })
 
     return (
         <div className={styles.wrap}>
-            <form action="" onSubmit={onSubmitForm}>
+            <form onSubmit={formik.handleSubmit}>
                 <TextField
                     type="textarea"
                     placeholder="Your email address"
                     variant="standard"
                     color="greyDark"
-                    name="email"
-                    value={inputData.email}
-                    onChange={onChangeInput}
                     className={styles.input}
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.errors.email}
                 />
 
                 <Button variant="contained"
