@@ -1,20 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./subscribeForm.module.scss";
 import {Validate} from "./validateSubscribeForm";
-import {Button, TextField} from "@mui/material";
+import {Alert, Button, TextField} from "@mui/material";
 import {useFormik} from "formik";
 
 export default function SubscribeForm(){
+
+    const [openAlert, setOpenAlert] = useState(false);
+    const onClose = () => setOpenAlert(false)
+    const onOpen = () => setOpenAlert(true)
 
     const validate = Validate;
     const formik = useFormik({
         initialValues: {email: ""},
         validate,
         onSubmit: (values, {resetForm}) => {
-            console.log(values.email.trim());
+            onOpen();
             resetForm();
         }
-    })
+    });
 
     return (
         <div className={styles.wrap}>
@@ -39,6 +43,15 @@ export default function SubscribeForm(){
                         className={styles.button}>
                     Subscribe
                 </Button>
+
+                { openAlert ? (
+                    <Alert variant="outlined"
+                           className={styles.alert}
+                           onClose={onClose} >
+                            Your data was send
+                    </Alert>
+                ) : null
+                }
 
                 <p className={styles.message}>*  Will send you weekly updates for your better tool management.</p>
 

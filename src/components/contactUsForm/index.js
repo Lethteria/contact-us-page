@@ -1,12 +1,29 @@
 import React from "react";
 import styles from "./contactUsForm.module.scss";
 import CheckboxBlock from "../checkboxBlock";
+import Modal from "../modal";
 import {useFormik} from "formik";
 import {Validate} from "./validateContactUsForm";
+
 
 import {Button, Grid, TextField} from "@mui/material";
 
 export default function ContactUsForm(){
+
+    const [openModal, setOpenModal] = React.useState(false);
+    const [userData, setUserData] = React.useState({});
+
+    const onClickOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const onCloseModal = () => {
+        setOpenModal(false);
+    };
+
+    const passUserData = (value) => {
+        setUserData(value);
+    }
 
     const labels = ["General Inquiry1", "General Inquiry2", "General Inquiry3", "General Inquiry4"];
     const inputsArr = [ {label: "First Name",
@@ -35,7 +52,8 @@ export default function ContactUsForm(){
                         },
         validate,
         onSubmit: (values, {resetForm}) => {
-            console.log(values);
+            passUserData(values);
+            onClickOpenModal();
             resetForm();
         }
     })
@@ -111,6 +129,11 @@ export default function ContactUsForm(){
 
                 </Grid>
             </form>
+
+            <Modal openModal={openModal}
+                   onCloseModal={onCloseModal}
+                   userData={userData}
+            />
 
         </div>
     )
