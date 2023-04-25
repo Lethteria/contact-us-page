@@ -12,6 +12,12 @@
   }
 }
 
+@media (min-width: 600px){
+  .title {
+    text-align: center;
+  }
+}
+
 @media (min-width: 900px){
   .contacts {
     display: flex;
@@ -22,6 +28,9 @@
 }
 
 @media (min-width: 1200px){
+  .title {
+    text-align: left;
+  }
   .contacts {
     flex-direction: column;
   }

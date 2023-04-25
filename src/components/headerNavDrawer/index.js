@@ -2,10 +2,10 @@ import React from 'react';
 import styles from "./headerNavDrawer.module.scss";
 import Box from "@mui/material/Box";
 import HeaderNavMenu from "../headerNavMenu";
-import HeaderNavLinks from "../headerNavLinks";
 import {Typography} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from '@mui/icons-material/Close';
+import HeaderNavLinksTablet from "../headerNavLinksTablet";
 
 
 export default function HeaderNavDrawer(props){
@@ -36,7 +36,7 @@ export default function HeaderNavDrawer(props){
                 </IconButton>
             </div>
 
-            <HeaderNavLinks className={styles.link}/>
+            <HeaderNavLinksTablet />
 
             <HeaderNavMenu className={styles.menu}/>
         </Box>

@@ -7,8 +7,10 @@ import {Typography} from "@mui/material";
 export default function FooterContacts(){
     return (
         <>
-            <Typography variant="h4">
-                title
+            <Typography variant="h4"
+                        className={styles.title}
+            >
+                Contacts
             </Typography>
 
             <Contacts className={styles.contacts}

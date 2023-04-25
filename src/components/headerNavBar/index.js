@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./headerNavBar.module.scss";
-import HeaderNavLinks from "../headerNavLinks";
+import HeaderNavLinksDesktop from "../headerNavLinksDesktop";
 import HeaderNavMenu from "../headerNavMenu";
 import HeaderNavDrawer from "../headerNavDrawer";
 import MenuButton from "../menuButton";
@@ -11,12 +11,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
-import {useMediaQuery} from "@mui/material";
 
 export default function HeaderNavBar() {
     const [showDrawer, setShowDrawer] = React.useState(false);
-    const showNavDesktop = useMediaQuery('(min-width:900px)');
-
     const toggleDrawer = (bool) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -36,27 +33,25 @@ export default function HeaderNavBar() {
                         Logo here
                     </Typography>
 
-                    {!showNavDesktop
-                        &&
-                        <Box className={styles.drawerWrap}>
-                            <MenuButton onClickMenu={toggleDrawer(true)}/>
 
-                            <Drawer anchor='right'
-                                    open={showDrawer}
-                                    onClose={toggleDrawer(false)}
-                            >
-                                <HeaderNavDrawer onClick={toggleDrawer(false)}
-                                                 onKeyDown={toggleDrawer(false)}
-                                />
-                            </Drawer>
-                        </Box>
-                    }
+                    <Box className={styles.drawerWrap}>
+                         <MenuButton onClickMenu={toggleDrawer(true)}/>
 
-                    {showNavDesktop && <div className={styles.menu}>
-                                            <HeaderNavLinks/>
-                                            <HeaderNavMenu/>
-                                       </div>
-                    }
+                         <Drawer anchor='right'
+                                 open={showDrawer}
+                                 onClose={toggleDrawer(false)}
+                         >
+                             <HeaderNavDrawer onClick={toggleDrawer(false)}
+                                              onKeyDown={toggleDrawer(false)}
+                             />
+                         </Drawer>
+                    </Box>
+
+                     <div className={styles.menu}>
+                           <HeaderNavLinksDesktop/>
+                           <HeaderNavMenu/>
+                     </div>
+
 
                 </Toolbar>
             </Container>

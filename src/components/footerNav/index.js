@@ -4,7 +4,7 @@ import {Grid, Typography} from "@mui/material";
 
 
 export default function FooterNav(){
-    //navData could be data fetching from server of from store
+
     const navData = [{title: "Company",
                       links: [{href: "#",
                                text: "About"},
