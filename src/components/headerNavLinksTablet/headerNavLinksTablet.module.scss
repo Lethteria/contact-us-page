@@ -16,7 +16,7 @@
     padding: 0;
     margin-bottom: 2rem;
 
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: $white-color;
     text-decoration: none;
   }
@@ -49,11 +49,11 @@ div.submenu {
   }
 
   p {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
 
   a {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: $black-color;
     &:last-child {
       margin-bottom: 0;
